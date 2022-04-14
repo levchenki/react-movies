@@ -16,7 +16,7 @@ export class Main extends Component {
 
     searchMovies = (filmName, filmType) => {
         this.setState({loading: true});
-        const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${filmName ? `${filmName}` : 'matrix'}${filmType ? `&type=${filmType}` : ''}`
+        const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${filmName ? `${filmName}` : 'matrix'}${filmType ? `&type=${filmType}` : ''}`
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -31,6 +31,10 @@ export class Main extends Component {
                 }, [])
                 return this.setState({movies: arr, loading: false});
             })
+            .catch((err)=>{
+                console.log(err);
+                this.setState({loading: false});
+            });
     }
 
     componentDidMount() {
