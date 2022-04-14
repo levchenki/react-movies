@@ -1,0 +1,31 @@
+.Cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+  grid-gap: 30px;
+  font-family: "JetBrains Mono", serif;
+}
+
+.Card {
+  border: 2px solid black;
+  border-radius: 15px;
+  overflow: hidden;
+
+  & > img {
+    //width: 100%;
+    height: auto;
+  }
+
+  & > .Card_text {
+    padding: 0 20px;
+
+    p:last-child {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & > .Card_title {
+      font-size: 20px;
+    }
+
+  }
+}

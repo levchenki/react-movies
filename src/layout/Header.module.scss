@@ -1,0 +1,17 @@
+header {
+  background-color: #62dafb;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    & > a {
+      font-size: 35px;
+    }
+
+    & > ul {
+      font-size: 15px;
+    }
+  }
+}

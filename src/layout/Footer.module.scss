@@ -1,0 +1,11 @@
+footer {
+  background-color: #62dafb;
+  font-family: "JetBrains Mono", serif;
+  font-size: 15px;
+  padding: 1rem 0;
+
+  & > .container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
