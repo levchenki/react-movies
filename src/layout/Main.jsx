@@ -1,21 +1,16 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Cards} from '../components/Cards';
 import {Preloader} from '../components/preloader/Preloader';
 import {Search} from '../components/Search';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export class Main extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            movies: [],
-            loading: true,
-        }
-    }
+export function Main() {
+    const [movies, setMovies] = useState([]);
+    const [loading, changeLoading] = useState(true);
 
-    searchMovies = (filmName, filmType) => {
-        this.setState({loading: true});
+    const searchMovies = (filmName, filmType) => {
+        changeLoading(true);
         const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${filmName ? `${filmName}` : 'matrix'}${filmType ? `&type=${filmType}` : ''}`
         fetch(url)
             .then(response => response.json())
@@ -29,27 +24,27 @@ export class Main extends Component {
                     }
                     return result;
                 }, [])
-                return this.setState({movies: arr, loading: false});
+                setMovies(arr);
+                return changeLoading(false);
             })
-            .catch((err)=>{
-                console.log(err);
-                this.setState({loading: false});
-            });
+            .catch((err) => {
+                    console.log(err);
+                    changeLoading(false);
+                }
+            );
     }
 
-    componentDidMount() {
-        this.searchMovies();
-    }
+    useEffect(() => {
+        searchMovies();
+    }, [])
 
-    render() {
-        const {movies, loading} = this.state;
-        return <div className='container content'>
-            <Search searchMovies={this.searchMovies}/>
-            {
-                loading
-                    ? (<Preloader/>)
-                    : (<Cards movies={movies}/>)
-            }
-        </div>
-    }
+    return <div className={'container content'}>
+        <Search searchMovies={searchMovies}/>
+        {
+            loading
+                ? (<Preloader/>)
+                : (<Cards movies={movies}/>)
+        }
+    </div>
+
 }

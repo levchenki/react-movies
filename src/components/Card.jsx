@@ -11,10 +11,10 @@ export function Card(props) {
     return <div id={id} className={'Card'}>
         {
             poster === 'N/A'
-                ? <img src={`https://via.placeholder.com/300x400.png?text=${title}`}/>
+                ? <img src={`https://via.placeholder.com/300x400.png?text=${title}`} alt={'pic'}/>
                 : <img
                     src={poster}
-                    width={1600} height={1600} alt='image'/>
+                    width={1600} height={1600} alt='pic'/>
         }
 
         {/*<div style={{background: `url(${Poster}) no-repeat center/cover`, height: '451px'}}/>*/}
